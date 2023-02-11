@@ -1,0 +1,42 @@
+#!/bin/bash
+echo "  /&&&&&&&  /&&&&&&&  /&&      /&& /&&&&&&&& /&&&&&& /&&   /&& /&&&&&&& "
+echo " | &&__  &&| &&__  &&| &&  /& | &&| &&_____/|_  &&_/| &&& | &&| &&__  &&"
+echo " | &&  \ &&| &&  \ &&| && /&&&| &&| &&        | &&  | &&&&| &&| &&  \ &&"
+echo " | &&&&&&&/| &&  | &&| &&/&& && &&| &&&&&     | &&  | && && &&| &&  | &&"
+echo " | &&____/ | &&  | &&| &&&&_  &&&&| &&__/     | &&  | &&  &&&&| &&  | &&"
+echo " | &&      | &&  | &&| &&&/ \  &&&| &&        | &&  | &&\  &&&| &&  | &&"
+echo " | &&      | &&&&&&&/| &&/   \  &&| &&       /&&&&&&| && \  &&| &&&&&&&/"
+echo " |__/      |_______/ |__/     \__/|__/      |______/|__/  \__/|_______/ "
+
+
+
+Search for strings in all /export/home directories and files that match the specified criteria
+
+timestp=$(date=%F=+%r)
+
+echo "What Directory would you like to scan today?"
+read directory
+echo "Scanning now......%."
+hashtag () {
+echo "#####" >> /root/scan_results.txt
+}
+
+timedate () {
+echo $timestp >> /root/scan_results.txt
+}
+
+        for dir in /home/$directory/*; do
+        if [[ ( ! $dir =~ ^\. ) ]]; then
+            for file in $(find $dir -type f); do
+                strings=$(grep -Pron -H "(?=^.{8,25}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#@$!%*?&])[A-Za-z\d#@$!%*?&]*" $file 2>/dev/null | grep -v -i "mozilla" | grep -v "firefox" | grep>
+            if [ -n "$strings" ]; then
+              hashtag
+              timedate
+              echo $strings >> /root/scan_results.txt
+           fi
+      done
+   fi
+done
+
+
+echo "Scan complete@/root/scan_results.txt "
