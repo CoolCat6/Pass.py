@@ -121,7 +121,7 @@ if [[ $keys == 'y'  ]]; then
 		systemd-cryptenroll --tpm2-device=list
 		echo "=== What is the path? ==="
 		read path
-		for dir in root swap var var_log var_log_audit var_tmp tmp home export_home; do
+		for dir in root swap var var_log var_log_audit var_tmp tmp home _home; do
 			systemd-cryptenroll --recovery-key /dev/mapper/$path-$dir
        			systemd-cryptenroll /dev/mapper/$path-$dir --tpm2-device=auto --tpm2-pcrs=5;
 		done
