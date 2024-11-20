@@ -33,7 +33,7 @@ echo "=== Do you want to set SSSD.conf? ==="
 read sssd
 if [[ $sssd == 'y' ]]; then
 	echo "[domain]
-<REDACTED>
+<*>
 " > /etc/sssd/sssd.conf
 cp /etc/sssd/sssd.conf /etc/sssd/sssd.bak
 echo "=== SSSD.CONF SET ==="
@@ -46,7 +46,7 @@ chmod 600 /etc/sssd/sssd.conf
 echo "=== Do you want to set KRB5.conf? ==="
 read krb
 if [[ $krb == 'y' ]]; then
-	echo "<REDACTED>" > /etc/krb5.conf
+	echo "<*>" > /etc/krb5.conf
   echo "=== KRB5 SET ==="
   cp /etc/krb5.conf /etc/krb5.bak
  else
@@ -158,8 +158,8 @@ if [[ $toke == 'y'  ]]; then
 	echo "### changing cac to coolkey ###"
 	sed -i 's/certificate/#certificate/g' /etc/sssd/conf.d/certificate.conf
 	sed -i 's/cac/'key'/g' /etc/opensc.conf
-	kinit <REDACTED>
-	bash /<REDACTED>/token.sh
+	kinit <*>
+	bash /<*>/token.sh
 else	
 	echo "=== Token was not set ==="
 fi
@@ -174,8 +174,8 @@ if [[ $vm == 'y' ]]; then
 		sed -i 's/StopIdleSessionSec=300/#StopIdleSessionSec=300/g' /etc/systemd/logind.conf
 		#sed -i 's/set -g lock-after-time 900/#set -g lock-after-time 900/g' /etc/tmux.conf
 		#tmux source-file /etc/tmux.conf
-		cp /<REDACTED>/sudoers /etc/sudoers.d/sudoers
-		cp /REDACTED>/blacklist.conf /etc/modprobe.d/
+		cp /<*>/sudoers /etc/sudoers.d/sudoers
+		cp /*>/blacklist.conf /etc/modprobe.d/
 		systemctl mask upower sleep.target suspend.target hibernate.target hybrid-sleep.target 
 		echo "retry = 3" >> /etc/security/pwhistory.conf
 		#echo "[ -n "$PS1" -a -z "$TMUX" ] && exec tmux" >> /etc/bashrc
