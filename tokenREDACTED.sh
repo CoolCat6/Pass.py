@@ -13,7 +13,7 @@ for lego in /etc/sssd/pki/sssd_auth_ca_db.pem; do
 		
 	elif ! [[ -r /etc/sssd/pki/sssd_auth_ca_db.pem ]]; then
 		cd /Desktop/Files/SAVE/bash/
-		/bin/bash /Desktop/Files/SAVE/bash/config-client-smart-card-rhel8.sh $token; 
+		/bin/bash /Desktop/smart-card.sh $token; 
 		echo "					"
 		echo "Install Script is Running now"
 		echo "					"
@@ -24,11 +24,11 @@ echo "### Do you want to copy and set configurations for the SSSD and .pemfile? 
 read question
 if [[ $question == "y" ]]; then
 	#cd /Desktop/Files/SAVE/bash
-	/bin/cp /Desktop/Files/SAVE/bash/sssd_auth_ca_db.pem /etc/sssd/pki/sssd_auth_ca_db.pem;
+	/bin/cp /Desktop/Files/SAVE/bash/sssd_auth_ca_db.pem /etc/sssd/pki/sssd.pem;
 	echo "			"
 	echo ".pem file copied"	
 	echo "			"
-	chmod -v 640 /etc/sssd/pki/sssd_auth_ca_db.pem
+	chmod -v 640 /etc/sssd/pki/.pem
 	echo "				"
 	echo "Permision to file changed"
 	echo "				"
@@ -39,7 +39,7 @@ if [[ $question == "y" ]]; then
 	systemctl daemon-reload
 	systemctl daemon-reexec
 	fixfiles relabel
-	/bin/bash ~/Desktop/Files/SAVE/bash/sssd_cashremove.sh
+	/bin/bash ~/Desktop/sssd_cashremove.sh
 	systemctl restart pcscd.service
 elif
 	[[ $question == "n" ]]; then
