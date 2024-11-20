@@ -2,7 +2,7 @@
 #============================================================================#
 #variables
 host=$HOSTNAME
-#===========================================================================
+#===========================================================================E
 #Setting users,token configs,stopping autoupdates,stopping auto sleeping and outputting configs that need to be set for TPM bind for luks
 echo "=== Do you want to set users (y/n) === "
 read users
