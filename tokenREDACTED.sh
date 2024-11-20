@@ -23,7 +23,7 @@ for lego in /etc/sssd/pki/sssd.pem; do
 echo "### Do you want to copy and set configurations for the SSSD and .pemfile? Y/N? ####"
 read question
 if [[ $question == "y" ]]; then
-	#cd /Desktop/Files/SAVE/bash
+	#cd /Desktop
 	/bin/cp /Desktop/sssd.pem /etc/sssd/pki/sssd.pem;
 	echo "			"
 	echo ".pem file copied"	
