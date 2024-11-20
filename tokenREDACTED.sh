@@ -7,12 +7,12 @@ echo "Please Kinit before instalation"
 token=sssd_auth_ca_db.pem
 
 cd /etc/sssd/pki/
-for lego in /etc/sssd/pki/sssd_auth_ca_db.pem; do
-	if [[ -r /etc/sssd/pki/sssd_auth_ca_db.pem ]]; then 
+for lego in /etc/sssd/pki/sssd.pem; do
+	if [[ -r /etc/sssd/pki/sssd.pem ]]; then 
 		echo "sssd_auth is installed"
 		
-	elif ! [[ -r /etc/sssd/pki/sssd_auth_ca_db.pem ]]; then
-		cd /Desktop/Files/SAVE/bash/
+	elif ! [[ -r /etc/sssd/pki/sssdpem ]]; then
+		cd /Desktop/
 		/bin/bash /Desktop/smart-card.sh $token; 
 		echo "					"
 		echo "Install Script is Running now"
@@ -24,7 +24,7 @@ echo "### Do you want to copy and set configurations for the SSSD and .pemfile? 
 read question
 if [[ $question == "y" ]]; then
 	#cd /Desktop/Files/SAVE/bash
-	/bin/cp /Desktop/Files/SAVE/bash/sssd_auth_ca_db.pem /etc/sssd/pki/sssd.pem;
+	/bin/cp /Desktop/sssd.pem /etc/sssd/pki/sssd.pem;
 	echo "			"
 	echo ".pem file copied"	
 	echo "			"
