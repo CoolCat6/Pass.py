@@ -4,7 +4,7 @@
 
 echo "Please Kinit before instalation"
 
-token=sssd_auth_ca_db.pem
+token=sssd.pem
 
 cd /etc/sssd/pki/
 for lego in /etc/sssd/pki/sssd.pem; do
