@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in <REDACTED> /etc/yum.repos.d/<REDACTED>; do 
+for i in <REDACTED> /etc/yum.repos.d/*; do 
         echo "gpgcheck=1" >> $i;
 done	
 #################################################
@@ -8,7 +8,7 @@ for i in daemon-reload daemon-reexec; do
 	grubby --update-kernel=ALL
 	grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 	systemctl $i
-	cat /etc/grub.d/01_users | grep user
-	cat /etc/yum.repos.d/<REDACTED>
+	cat /etc/grub.d/1_users | grep user
+	cat /etc/yum.repos.d/*
 	cat /boot/efi/EFI/redhat/grub.cfg | grep user
 done
