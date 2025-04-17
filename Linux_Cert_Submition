@@ -1,0 +1,27 @@
+$hostname = Read-Host "## Enter hostname , Not Fully qualified"
+copy-Item -Path Z:\$hostname.DOMAIN.csr -Destination "\\fileshare\path\to\user Folders\username"
+$csrpath = "\\ent-vyst10b\CyberSecurity\User Folders\Foster\$hostname.ent.slocal.csr"
+$certpathout = "\\fileshare\path\to\user Folders\username" Folders\username\$hostname.DOMAIN.cer"
+$attrib = "CertificateTemplate:Linux"
+certreq.exe -attrib $attrib $csrpath $certpathout 
+$remoteAD = "AD-DC_FQDN"
+$username = "$hostname"
+$certpath = ""\\fileshare\path\to\user Folders\username" Folders\username\$hostname.DOMAIN"
+$cert = Get-PfxCertificate -FilePath $certpath
+$creds = Get-Credential
+Invoke-Command -ComputerName $remoteAD -Credential $creds -ScriptBlock {
+param (
+	$username, 
+	$cert
+)
+Import-Module ActiveDirectory
+$user = Get-ADUser -Identity $username -Properties altSecurityIdentities
+if ($user) {
+ $user | Set-ADUser -Add @{altSecurityIdentities = $cert}
+ Write-Host "Cert Added"
+} else {
+    Write-Host "Cert NOT Added"
+        
+}
+} -ArgumentList $username, $cert
+copy-Item -Path ""\\fileshare\path\to\user Folders\username" Folders\username\$hostname.DOMAIN.cer" -Destination Z:\
